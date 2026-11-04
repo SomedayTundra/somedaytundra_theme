@@ -11,7 +11,7 @@ export default function Backdrop() {
             aria-hidden="true"
             className={clsx(
                 'pointer-events-none fixed inset-0 z-0 overflow-hidden',
-                theme === 'glacier-forest' ? 'gf-backdrop' : 'bg-page',
+                theme === 'glacier-forest' ? 'gf-backdrop' : 'bg-st-page',
                 animated && 'is-animated'
             )}
         >

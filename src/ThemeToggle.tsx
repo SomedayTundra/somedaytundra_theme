@@ -8,16 +8,30 @@ const OPTIONS: { id: ThemeId; Icon: typeof Sun }[] = [
     { id: 'aurora', Icon: Moon },
 ]
 
-const segment = 'flex h-full cursor-pointer items-center gap-2 rounded-lg px-3 text-[13.5px] font-bold transition-colors'
-const activeSegment = 'bg-accent-soft text-accent-soft-ink'
-const inactiveSegment = 'text-muted hover:text-ink'
+const segment = 'flex h-full cursor-pointer items-center rounded-lg transition-colors'
+const fullSegment = `${segment} gap-2 px-3 text-[13.5px] font-bold`
+// icon-only: square buttons, so the control fits in a nav bar
+const compactSegment = `${segment} aspect-square justify-center`
+const activeSegment = 'bg-st-accent-soft text-st-accent-soft-ink'
+const inactiveSegment = 'text-st-muted hover:text-st-ink'
+
+type ThemeToggleProps = {
+    // day/night icons instead of the theme names, at nav-bar height
+    compact?: boolean
+}
 
 // Quick-access switches for the theme and background animation; the same choices live under
 // Settings › Appearance.
-export default function ThemeToggle() {
+export default function ThemeToggle({ compact = false }: ThemeToggleProps) {
     const { theme, setTheme, animated, setAnimated } = useTheme()
+    const button = compact ? compactSegment : fullSegment
     return (
-        <div className="flex h-11 items-center gap-1 rounded-xl border border-line bg-surface p-1">
+        <div
+            className={clsx(
+                'flex items-center gap-1 border border-st-line bg-st-surface p-1',
+                compact ? 'h-9 rounded-[10px]' : 'h-11 rounded-xl'
+            )}
+        >
             <div role="group" aria-label="Theme" className="flex h-full items-center gap-1">
                 {OPTIONS.map(({ id, Icon }) => {
                     const active = theme === id
@@ -28,22 +42,28 @@ export default function ThemeToggle() {
                             aria-pressed={active}
                             onClick={() => setTheme(id)}
                             title={THEMES[id].name}
-                            className={clsx(segment, active ? activeSegment : inactiveSegment)}
+                            className={clsx(button, active ? activeSegment : inactiveSegment)}
                         >
                             <Icon aria-hidden="true" className="size-4" />
-                            <span className="hidden sm:inline">{THEMES[id].name}</span>
-                            <span className="sr-only sm:hidden">{THEMES[id].name}</span>
+                            {compact ? (
+                                <span className="sr-only">{THEMES[id].name}</span>
+                            ) : (
+                                <>
+                                    <span className="hidden sm:inline">{THEMES[id].name}</span>
+                                    <span className="sr-only sm:hidden">{THEMES[id].name}</span>
+                                </>
+                            )}
                         </button>
                     )
                 })}
             </div>
-            <span aria-hidden="true" className="mx-0.5 h-5 w-px bg-line" />
+            <span aria-hidden="true" className={clsx('mx-0.5 w-px bg-st-line', compact ? 'h-4' : 'h-5')} />
             <button
                 type="button"
                 aria-pressed={animated}
                 onClick={() => setAnimated(!animated)}
                 title={animated ? 'Animation on' : 'Animation off'}
-                className={clsx(segment, animated ? activeSegment : inactiveSegment)}
+                className={clsx(button, animated ? activeSegment : inactiveSegment)}
             >
                 <Sparkles aria-hidden="true" className={clsx('size-4', !animated && 'opacity-60')} />
                 <span className="sr-only">Background animation</span>

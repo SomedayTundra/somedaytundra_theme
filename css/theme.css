@@ -9,92 +9,97 @@
 @source "../dist";
 
 /* Theme tokens. Each theme sets the same custom properties on <html data-theme="…">; components
-   only ever use the Tailwind names below (bg-surface, text-ink, …), so a new theme is just a new
-   block here plus an entry in src/themes.ts. */
+   only ever use the Tailwind names below (bg-st-surface, text-st-ink, …), so a new theme is just a new
+   block here plus an entry in src/themes.ts. Every name carries an st- prefix so the theme can sit
+   beside another design system's tokens (shadcn's --muted and --accent mean something else). */
 @theme inline {
     --font-sans: Manrope, system-ui, sans-serif;
     --font-display: Sora, Manrope, system-ui, sans-serif;
     --font-mono: "JetBrains Mono", ui-monospace, monospace;
 
-    --color-page: var(--page);
-    --color-sidebar: var(--sidebar);
-    --color-surface: var(--surface);
-    --color-surface-hero: var(--surface-hero);
-    --color-ink: var(--ink);
-    --color-ink-2: var(--ink-2);
-    --color-muted: var(--muted);
-    --color-line: var(--line);
-    --color-line-soft: var(--line-soft);
-    --color-accent: var(--accent);
-    --color-accent-ink: var(--accent-ink);
-    --color-accent-soft: var(--accent-soft);
-    --color-accent-soft-ink: var(--accent-soft-ink);
-    --color-nav-hover: var(--nav-hover);
-    --color-link: var(--link);
-    --color-wordmark: var(--wordmark);
-    --color-proj-nhl: var(--proj-nhl);
-    --color-proj-nhl-soft: var(--proj-nhl-soft);
-    --color-proj-shuttle: var(--proj-shuttle);
-    --color-proj-shuttle-soft: var(--proj-shuttle-soft);
-    --color-proj-devblog: var(--proj-devblog);
-    --color-proj-devblog-soft: var(--proj-devblog-soft);
+    --color-st-page: var(--st-page);
+    --color-st-sidebar: var(--st-sidebar);
+    --color-st-surface: var(--st-surface);
+    --color-st-surface-hero: var(--st-surface-hero);
+    --color-st-surface-solid: var(--st-surface-solid);
+    --color-st-ink: var(--st-ink);
+    --color-st-ink-2: var(--st-ink-2);
+    --color-st-muted: var(--st-muted);
+    --color-st-line: var(--st-line);
+    --color-st-line-soft: var(--st-line-soft);
+    --color-st-accent: var(--st-accent);
+    --color-st-accent-ink: var(--st-accent-ink);
+    --color-st-accent-soft: var(--st-accent-soft);
+    --color-st-accent-soft-ink: var(--st-accent-soft-ink);
+    --color-st-nav-hover: var(--st-nav-hover);
+    --color-st-link: var(--st-link);
+    --color-st-wordmark: var(--st-wordmark);
+    --color-st-proj-nhl: var(--st-proj-nhl);
+    --color-st-proj-nhl-soft: var(--st-proj-nhl-soft);
+    --color-st-proj-shuttle: var(--st-proj-shuttle);
+    --color-st-proj-shuttle-soft: var(--st-proj-shuttle-soft);
+    --color-st-proj-devblog: var(--st-proj-devblog);
+    --color-st-proj-devblog-soft: var(--st-proj-devblog-soft);
 
-    --shadow-card: var(--card-shadow);
+    --shadow-st-card: var(--st-card-shadow);
 }
 
 :root,
 [data-theme="glacier-forest"] {
     color-scheme: light;
-    --page: #F4F8FC;
-    --sidebar: rgba(255, 255, 255, 0.78);
-    --surface: #FFFFFF;
-    --surface-hero: #FFFFFF;
-    --ink: #0E2238;
-    --ink-2: #35506D;
-    --muted: #4A607A;
-    --line: #D3E2F0;
-    --line-soft: #E6EEF6;
-    --accent: #1F6BC0;
-    --accent-ink: #FFFFFF;
-    --accent-soft: #E3EFFA;
-    --accent-soft-ink: #17589F;
-    --nav-hover: #EAF2FA;
-    --link: #1F6BC0;
-    --wordmark: #377ACD;
-    --proj-nhl: #1F6BC0;
-    --proj-nhl-soft: #E3EFFA;
-    --proj-shuttle: #1F6BC0;
-    --proj-shuttle-soft: #E3EFFA;
-    --proj-devblog: #1F6BC0;
-    --proj-devblog-soft: #E3EFFA;
-    --card-shadow: 0 24px 48px -32px rgba(16, 74, 140, 0.45);
+    --st-page: #F4F8FC;
+    --st-sidebar: rgba(255, 255, 255, 0.78);
+    --st-surface: #FFFFFF;
+    --st-surface-hero: #FFFFFF;
+    /* surface is translucent on Aurora; this is the opaque version, for menus and popovers */
+    --st-surface-solid: #FFFFFF;
+    --st-ink: #0E2238;
+    --st-ink-2: #35506D;
+    --st-muted: #4A607A;
+    --st-line: #D3E2F0;
+    --st-line-soft: #E6EEF6;
+    --st-accent: #1F6BC0;
+    --st-accent-ink: #FFFFFF;
+    --st-accent-soft: #E3EFFA;
+    --st-accent-soft-ink: #17589F;
+    --st-nav-hover: #EAF2FA;
+    --st-link: #1F6BC0;
+    --st-wordmark: #377ACD;
+    --st-proj-nhl: #1F6BC0;
+    --st-proj-nhl-soft: #E3EFFA;
+    --st-proj-shuttle: #1F6BC0;
+    --st-proj-shuttle-soft: #E3EFFA;
+    --st-proj-devblog: #1F6BC0;
+    --st-proj-devblog-soft: #E3EFFA;
+    --st-card-shadow: 0 24px 48px -32px rgba(16, 74, 140, 0.45);
 }
 
 [data-theme="aurora"] {
     color-scheme: dark;
-    --page: #05070B;
-    --sidebar: rgba(9, 12, 18, 0.55);
-    --surface: rgba(12, 17, 24, 0.84);
-    --surface-hero: rgba(10, 14, 20, 0.55);
-    --ink: #E7EEF4;
-    --ink-2: #A9B8C8;
-    --muted: #93A5B8;
-    --line: #1C2733;
-    --line-soft: #18222D;
-    --accent: #5BE7A9;
-    --accent-ink: #03140C;
-    --accent-soft: rgba(91, 231, 169, 0.11);
-    --accent-soft-ink: #7EF0BE;
-    --nav-hover: #121A24;
-    --link: #7EF0BE;
-    --wordmark: #4CCFE0;
-    --proj-nhl: #5BE7A9;
-    --proj-nhl-soft: rgba(91, 231, 169, 0.12);
-    --proj-shuttle: #4CCFE0;
-    --proj-shuttle-soft: rgba(76, 207, 224, 0.12);
-    --proj-devblog: #B9A0FF;
-    --proj-devblog-soft: rgba(169, 139, 255, 0.13);
-    --card-shadow: 0 18px 40px -24px rgba(91, 231, 169, 0.35);
+    --st-page: #05070B;
+    --st-sidebar: rgba(9, 12, 18, 0.55);
+    --st-surface: rgba(12, 17, 24, 0.84);
+    --st-surface-hero: rgba(10, 14, 20, 0.55);
+    --st-surface-solid: #0C1118;
+    --st-ink: #E7EEF4;
+    --st-ink-2: #A9B8C8;
+    --st-muted: #93A5B8;
+    --st-line: #1C2733;
+    --st-line-soft: #18222D;
+    --st-accent: #5BE7A9;
+    --st-accent-ink: #03140C;
+    --st-accent-soft: rgba(91, 231, 169, 0.11);
+    --st-accent-soft-ink: #7EF0BE;
+    --st-nav-hover: #121A24;
+    --st-link: #7EF0BE;
+    --st-wordmark: #4CCFE0;
+    --st-proj-nhl: #5BE7A9;
+    --st-proj-nhl-soft: rgba(91, 231, 169, 0.12);
+    --st-proj-shuttle: #4CCFE0;
+    --st-proj-shuttle-soft: rgba(76, 207, 224, 0.12);
+    --st-proj-devblog: #B9A0FF;
+    --st-proj-devblog-soft: rgba(169, 139, 255, 0.13);
+    --st-card-shadow: 0 18px 40px -24px rgba(91, 231, 169, 0.35);
 }
 
 

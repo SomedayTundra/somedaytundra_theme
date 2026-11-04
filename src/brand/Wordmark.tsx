@@ -11,7 +11,7 @@ export default function Wordmark({ size, className }: WordmarkProps) {
     return (
         <span
             className={clsx(
-                'font-extrabold tracking-[0.04em] text-wordmark',
+                'font-extrabold tracking-[0.04em] text-st-wordmark',
                 size === 'md' ? 'text-[17px] leading-none' : 'text-[13px]',
                 className
             )}
