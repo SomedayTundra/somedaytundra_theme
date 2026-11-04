@@ -1,0 +1,63 @@
+{
+  "name": "@somedaytundra/theme",
+  "version": "0.1.0",
+  "description": "The SomedayTundra Glacier Forest and Aurora themes: tokens, backdrops, igloo logo, theme provider and Clerk styling.",
+  "private": true,
+  "type": "module",
+  "sideEffects": [
+    "*.css"
+  ],
+  "files": [
+    "dist",
+    "css"
+  ],
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    },
+    "./clerk": {
+      "types": "./dist/clerk.d.ts",
+      "default": "./dist/clerk.js"
+    },
+    "./vite": {
+      "types": "./dist/vite.d.ts",
+      "default": "./dist/vite.js"
+    },
+    "./theme.css": {
+      "style": "./css/theme.css",
+      "default": "./css/theme.css"
+    }
+  },
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "dev": "tsc -p tsconfig.json --watch",
+    "lint": "eslint .",
+    "prepare": "npm run build"
+  },
+  "dependencies": {
+    "clsx": "^2.1.1",
+    "lucide-react": "^1.66.0"
+  },
+  "peerDependencies": {
+    "@clerk/react": "^6.18.4",
+    "react": "^19.3.1"
+  },
+  "peerDependenciesMeta": {
+    "@clerk/react": {
+      "optional": true
+    }
+  },
+  "devDependencies": {
+    "@clerk/react": "^6.18.5",
+    "@eslint/js": "^9.39.5",
+    "@types/react": "^19.3.0",
+    "eslint": "^9.39.5",
+    "eslint-plugin-react-hooks": "^7.1.1",
+    "eslint-plugin-react-refresh": "^0.4.26",
+    "globals": "^16.5.0",
+    "react": "^19.3.1",
+    "typescript": "~6.0",
+    "typescript-eslint": "^8.72.1"
+  }
+}

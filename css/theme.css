@@ -1,0 +1,209 @@
+/* SomedayTundra theme: design tokens for both themes, the Tailwind names that map onto them, and
+   the backdrop animations. Import it after Tailwind:
+
+       @import "tailwindcss";
+       @import "@somedaytundra/theme/theme.css";
+
+   The package's components use Tailwind utility classes, so this also tells Tailwind to scan the
+   built package for them (it skips node_modules on its own). */
+@source "../dist";
+
+/* Theme tokens. Each theme sets the same custom properties on <html data-theme="…">; components
+   only ever use the Tailwind names below (bg-surface, text-ink, …), so a new theme is just a new
+   block here plus an entry in src/themes.ts. */
+@theme inline {
+    --font-sans: Manrope, system-ui, sans-serif;
+    --font-display: Sora, Manrope, system-ui, sans-serif;
+    --font-mono: "JetBrains Mono", ui-monospace, monospace;
+
+    --color-page: var(--page);
+    --color-sidebar: var(--sidebar);
+    --color-surface: var(--surface);
+    --color-surface-hero: var(--surface-hero);
+    --color-ink: var(--ink);
+    --color-ink-2: var(--ink-2);
+    --color-muted: var(--muted);
+    --color-line: var(--line);
+    --color-line-soft: var(--line-soft);
+    --color-accent: var(--accent);
+    --color-accent-ink: var(--accent-ink);
+    --color-accent-soft: var(--accent-soft);
+    --color-accent-soft-ink: var(--accent-soft-ink);
+    --color-nav-hover: var(--nav-hover);
+    --color-link: var(--link);
+    --color-wordmark: var(--wordmark);
+    --color-proj-nhl: var(--proj-nhl);
+    --color-proj-nhl-soft: var(--proj-nhl-soft);
+    --color-proj-shuttle: var(--proj-shuttle);
+    --color-proj-shuttle-soft: var(--proj-shuttle-soft);
+    --color-proj-devblog: var(--proj-devblog);
+    --color-proj-devblog-soft: var(--proj-devblog-soft);
+
+    --shadow-card: var(--card-shadow);
+}
+
+:root,
+[data-theme="glacier-forest"] {
+    color-scheme: light;
+    --page: #F4F8FC;
+    --sidebar: rgba(255, 255, 255, 0.78);
+    --surface: #FFFFFF;
+    --surface-hero: #FFFFFF;
+    --ink: #0E2238;
+    --ink-2: #35506D;
+    --muted: #4A607A;
+    --line: #D3E2F0;
+    --line-soft: #E6EEF6;
+    --accent: #1F6BC0;
+    --accent-ink: #FFFFFF;
+    --accent-soft: #E3EFFA;
+    --accent-soft-ink: #17589F;
+    --nav-hover: #EAF2FA;
+    --link: #1F6BC0;
+    --wordmark: #377ACD;
+    --proj-nhl: #1F6BC0;
+    --proj-nhl-soft: #E3EFFA;
+    --proj-shuttle: #1F6BC0;
+    --proj-shuttle-soft: #E3EFFA;
+    --proj-devblog: #1F6BC0;
+    --proj-devblog-soft: #E3EFFA;
+    --card-shadow: 0 24px 48px -32px rgba(16, 74, 140, 0.45);
+}
+
+[data-theme="aurora"] {
+    color-scheme: dark;
+    --page: #05070B;
+    --sidebar: rgba(9, 12, 18, 0.55);
+    --surface: rgba(12, 17, 24, 0.84);
+    --surface-hero: rgba(10, 14, 20, 0.55);
+    --ink: #E7EEF4;
+    --ink-2: #A9B8C8;
+    --muted: #93A5B8;
+    --line: #1C2733;
+    --line-soft: #18222D;
+    --accent: #5BE7A9;
+    --accent-ink: #03140C;
+    --accent-soft: rgba(91, 231, 169, 0.11);
+    --accent-soft-ink: #7EF0BE;
+    --nav-hover: #121A24;
+    --link: #7EF0BE;
+    --wordmark: #4CCFE0;
+    --proj-nhl: #5BE7A9;
+    --proj-nhl-soft: rgba(91, 231, 169, 0.12);
+    --proj-shuttle: #4CCFE0;
+    --proj-shuttle-soft: rgba(76, 207, 224, 0.12);
+    --proj-devblog: #B9A0FF;
+    --proj-devblog-soft: rgba(169, 139, 255, 0.13);
+    --card-shadow: 0 18px 40px -24px rgba(91, 231, 169, 0.35);
+}
+
+
+
+/* ---------- Glacier Forest backdrop ---------- */
+
+.gf-backdrop {
+    background: linear-gradient(180deg, #DDEBF8 0px, #EDF4FB 360px, #F4F8FC 620px);
+}
+
+.st-flake {
+    position: absolute;
+    border-radius: 50%;
+    background: #FFFFFF;
+    box-shadow: 0 0 6px rgba(31, 107, 192, 0.5), 0 0 0 0.5px rgba(31, 107, 192, 0.22);
+}
+
+.st-far {
+    box-shadow: 0 0 4px rgba(31, 107, 192, 0.4), 0 0 0 0.5px rgba(31, 107, 192, 0.18);
+}
+
+/* animated flakes all start just above the viewport; negative delays spread them down the screen */
+.is-animated .st-flake {
+    top: -12px !important;
+    animation-name: st-fall, st-drift;
+    animation-timing-function: linear, ease-in-out;
+    animation-iteration-count: infinite;
+    animation-direction: normal, alternate;
+}
+
+.is-animated .st-flake.st-far {
+    animation-name: st-fall-far, st-drift-far;
+}
+
+@keyframes st-fall {
+    from { transform: translateY(0); }
+    to { transform: translateY(calc(100vh + 24px)); }
+}
+
+@keyframes st-drift {
+    from { translate: -7px 0; }
+    to { translate: 7px 0; }
+}
+
+@keyframes st-fall-far {
+    from { transform: translate(0, 0); }
+    to { transform: translate(-90px, calc(100vh + 24px)); }
+}
+
+@keyframes st-drift-far {
+    from { translate: -16px 0; }
+    to { translate: 16px 0; }
+}
+
+/* ---------- Aurora backdrop ---------- */
+
+.au-star {
+    position: absolute;
+    border-radius: 50%;
+    background: #DDEBFF;
+}
+
+.is-animated .au-star {
+    animation: au-twinkle ease-in-out infinite alternate;
+}
+
+@keyframes au-twinkle {
+    from { opacity: 0.15; }
+    to { opacity: 0.85; }
+}
+
+.au-ray {
+    position: absolute;
+    opacity: 0.7;
+    mix-blend-mode: screen;
+    transform-origin: 50% 100%;
+    border-radius: 40% 40% 50% 50% / 10% 10% 6% 6%;
+}
+
+.au-ray-a {
+    background: linear-gradient(0deg, rgba(150, 255, 205, 0) 0%, rgba(150, 255, 205, 0.6) 5%, rgba(75, 227, 160, 0.38) 28%, rgba(120, 170, 255, 0.16) 62%, rgba(169, 139, 255, 0) 100%);
+}
+
+.au-ray-b {
+    background: linear-gradient(0deg, rgba(76, 207, 224, 0) 0%, rgba(76, 207, 224, 0.35) 6%, rgba(169, 139, 255, 0.22) 40%, rgba(228, 111, 176, 0.1) 75%, rgba(228, 111, 176, 0) 100%);
+}
+
+.is-animated .au-field {
+    animation: au-field 28s ease-in-out infinite alternate;
+}
+
+.is-animated .au-ray {
+    animation-name: au-ray-glow, au-ray-sway;
+    animation-timing-function: ease-in-out;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+}
+
+@keyframes au-field {
+    from { translate: -90px 0; }
+    to { translate: 90px 0; }
+}
+
+@keyframes au-ray-glow {
+    from { opacity: 0.25; transform: scaleY(0.85); }
+    to { opacity: 1; transform: scaleY(1.12); }
+}
+
+@keyframes au-ray-sway {
+    from { translate: -22px 0; }
+    to { translate: 22px 0; }
+}
