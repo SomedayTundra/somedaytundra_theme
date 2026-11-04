@@ -33,7 +33,8 @@ It's built for Vite + React 19 + Tailwind CSS v4 apps.
 
    The file also points Tailwind at the package's built components (`@source "../dist"`), so the
    utility classes they use get generated. Body styles (`background: var(--page)`,
-   `color: var(--ink)`, `font-family: var(--font-sans)`) are left to each app.
+   `color: var(--ink)`) are left to each app. The font needs nothing: it sets `--font-sans`, which
+   Tailwind's base styles already apply to the page.
 
 3. **Fonts.** Add to `index.html`:
 
