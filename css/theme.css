@@ -31,6 +31,7 @@
     --color-st-accent-ink: var(--st-accent-ink);
     --color-st-accent-soft: var(--st-accent-soft);
     --color-st-accent-soft-ink: var(--st-accent-soft-ink);
+    --color-st-accent-tint: var(--st-accent-tint);
     --color-st-nav-hover: var(--st-nav-hover);
     --color-st-link: var(--st-link);
     --color-st-wordmark: var(--st-wordmark);
@@ -62,6 +63,8 @@
     --st-accent-ink: #FFFFFF;
     --st-accent-soft: #E3EFFA;
     --st-accent-soft-ink: #17589F;
+    /* one step deeper than accent-soft: hover and highlight on a tinted surface */
+    --st-accent-tint: #CCDFF4;
     --st-nav-hover: #EAF2FA;
     --st-link: #1F6BC0;
     --st-wordmark: #377ACD;
@@ -90,6 +93,7 @@
     --st-accent-ink: #03140C;
     --st-accent-soft: rgba(91, 231, 169, 0.11);
     --st-accent-soft-ink: #7EF0BE;
+    --st-accent-tint: rgba(91, 231, 169, 0.2);
     --st-nav-hover: #121A24;
     --st-link: #7EF0BE;
     --st-wordmark: #4CCFE0;

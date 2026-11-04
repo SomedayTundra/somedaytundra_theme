@@ -15,7 +15,7 @@ It's built for Vite + React 19 + Tailwind CSS v4 apps.
 ## Using it in an app
 
 1. **Install** a tagged release:
-   `npm install "github:SomedayTundra/somedaytundra_theme#v0.1.0"`.
+   `npm install "github:SomedayTundra/somedaytundra_theme#v0.2.0"`.
    npm builds the package on install with its `prepare` script.
 
    To develop an app against a local checkout of this repo without changing its dependency, point
@@ -89,6 +89,10 @@ It's built for Vite + React 19 + Tailwind CSS v4 apps.
   these, e.g. `--background: var(--st-page)`. `--st-surface-solid` is the opaque surface, for
   menus and popovers; Aurora's `--st-surface` is translucent.
   A new theme is a new token block in `css/theme.css` plus an entry in `src/themes.ts`.
+- **The accent scale**, lightest to darkest: `st-accent-soft` (resting tints, such as table header
+  rows), `st-accent-tint` (the hover/highlight shade on a tint), `st-accent-soft-ink` (text on a
+  tint), `st-accent` (solid), with `st-accent-ink` as the text on solid. On Glacier Forest it's
+  one family of blues; on Aurora, greens.
 - **Persistence.** `ThemeProvider` keeps the theme and motion setting in localStorage under
   `st.theme` and `st.motion`. Apps on the same origin share them. The Vite plugin reads the same
   keys before first paint.
