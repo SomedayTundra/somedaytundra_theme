@@ -14,14 +14,15 @@ It's built for Vite + React 19 + Tailwind CSS v4 apps.
 
 ## Using it in an app
 
-1. **Install.**
-   - While developing both side by side, link the folder:
-     `npm install "@somedaytundra/theme@file:../somedaytundra_theme"`.
-   - For deploys, use a tagged release:
-     `npm install "github:SomedayTundra/somedaytundra_theme#v0.1.0"`.
-     npm builds the package on install with its `prepare` script. npm 11 asks before running it,
-     so approve it once: `npm install-scripts ls` shows the name to pass to
-     `npm install-scripts approve`.
+1. **Install** a tagged release:
+   `npm install "github:SomedayTundra/somedaytundra_theme#v0.1.0"`.
+   npm builds the package on install with its `prepare` script.
+
+   To develop an app against a local checkout of this repo without changing its dependency, point
+   the app's dev server at the checkout and leave builds on the release. The dashboard's
+   `vite.config.ts` does this: when `command === 'serve'` and `../somedaytundra_theme/dist`
+   exists, it aliases `@somedaytundra/theme`, `/clerk` and `/theme.css` to the checkout's files.
+   It also lists the checkout first in `tsconfig` `paths`, with the installed copy as fallback.
 
 2. **CSS.** Import it right after Tailwind:
 
@@ -50,7 +51,7 @@ It's built for Vite + React 19 + Tailwind CSS v4 apps.
    export default defineConfig({
      plugins: [react(), tailwindcss(), somedaytundraTheme()],
      resolve: {
-       // needed while the package is linked from a folder, which has its own dev copies of these
+       // needed when the dev server uses a local checkout, which has its own dev copies of these
        dedupe: ['react', 'react-dom', '@clerk/react'],
      },
    })
