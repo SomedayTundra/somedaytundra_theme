@@ -6,7 +6,7 @@ tree line) and **Aurora** (dark: northern-lights ribbons over a night sky).
 | Import | What it gives you |
 |---|---|
 | `@somedaytundra/theme/theme.css` | Both themes' color tokens on `<html data-theme="…">`, the Tailwind names for them (`bg-st-surface`, `text-st-ink`, `text-st-muted`, `border-st-line`, `bg-st-accent`, …), the fonts' Tailwind names, and the backdrop animations. |
-| `@somedaytundra/theme` | `ThemeProvider` and `useTheme()` (theme plus the background-motion setting), `ThemeToggle` (`compact` for an icon-only version that fits a nav bar), `Backdrop`, `IglooMark`, `Wordmark`, `THEMES`, and `clerkAppearance()` for Clerk's screens. |
+| `@somedaytundra/theme` | `ThemeProvider` and `useTheme()` (theme plus the background-motion setting), `ThemeToggle` (`compact` for an icon-only version that fits a nav bar; `animationToggle={false}` drops the animation switch for apps without the backdrop), `Backdrop`, `IglooMark`, `Wordmark`, `THEMES`, and `clerkAppearance()` for Clerk's screens. |
 | `@somedaytundra/theme/clerk` | `ThemePreferenceSync`, which saves the theme and motion settings to the signed-in user's Clerk account. Needs `@clerk/react`. |
 | `@somedaytundra/theme/vite` | `somedaytundraTheme()`, a Vite plugin that applies the saved theme before first paint. |
 
@@ -15,7 +15,7 @@ It's built for Vite + React 19 + Tailwind CSS v4 apps.
 ## Using it in an app
 
 1. **Install** a tagged release:
-   `npm install "github:SomedayTundra/somedaytundra_theme#v0.2.0"`.
+   `npm install "github:SomedayTundra/somedaytundra_theme#v0.3.1"`.
    npm builds the package on install with its `prepare` script.
 
    To develop an app against a local checkout of this repo without changing its dependency, point

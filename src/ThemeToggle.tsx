@@ -18,11 +18,14 @@ const inactiveSegment = 'text-st-muted hover:text-st-ink'
 type ThemeToggleProps = {
     // day/night icons instead of the theme names, at nav-bar height
     compact?: boolean
+    // false drops the animation switch, for apps that don't draw the animated backdrop
+    animationToggle?: boolean
 }
 
-// Quick-access switches for the theme and background animation; the same choices live under
+// Quick-access switches for the theme and (unless animationToggle is false) background animation;
+// the same choices live under
 // Settings › Appearance.
-export default function ThemeToggle({ compact = false }: ThemeToggleProps) {
+export default function ThemeToggle({ compact = false, animationToggle = true }: ThemeToggleProps) {
     const { theme, setTheme, animated, setAnimated } = useTheme()
     const button = compact ? compactSegment : fullSegment
     return (
@@ -57,17 +60,21 @@ export default function ThemeToggle({ compact = false }: ThemeToggleProps) {
                     )
                 })}
             </div>
-            <span aria-hidden="true" className={clsx('mx-0.5 w-px bg-st-line', compact ? 'h-4' : 'h-5')} />
-            <button
-                type="button"
-                aria-pressed={animated}
-                onClick={() => setAnimated(!animated)}
-                title={animated ? 'Animation on' : 'Animation off'}
-                className={clsx(button, animated ? activeSegment : inactiveSegment)}
-            >
-                <Sparkles aria-hidden="true" className={clsx('size-4', !animated && 'opacity-60')} />
-                <span className="sr-only">Background animation</span>
-            </button>
+            {animationToggle && (
+                <>
+                    <span aria-hidden="true" className={clsx('mx-0.5 w-px bg-st-line', compact ? 'h-4' : 'h-5')} />
+                    <button
+                        type="button"
+                        aria-pressed={animated}
+                        onClick={() => setAnimated(!animated)}
+                        title={animated ? 'Animation on' : 'Animation off'}
+                        className={clsx(button, animated ? activeSegment : inactiveSegment)}
+                    >
+                        <Sparkles aria-hidden="true" className={clsx('size-4', !animated && 'opacity-60')} />
+                        <span className="sr-only">Background animation</span>
+                    </button>
+                </>
+            )}
         </div>
     )
 }
