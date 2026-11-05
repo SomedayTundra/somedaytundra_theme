@@ -15,7 +15,7 @@ It's built for Vite + React 19 + Tailwind CSS v4 apps.
 ## Using it in an app
 
 1. **Install** a tagged release:
-   `npm install "github:SomedayTundra/somedaytundra_theme#v0.3.1"`.
+   `npm install "github:SomedayTundra/somedaytundra_theme#v0.3.2"`.
    npm builds the package on install with its `prepare` script.
 
    To develop an app against a local checkout of this repo without changing its dependency, point
