@@ -1,7 +1,8 @@
 import * as React from 'react'
 import { type LocalStorageOptions, useLocalStorageState } from './useLocalStorageState.ts'
-import { ThemeContext } from './themeContext.ts'
+import { type AccountPreferences, AccountPreferencesContext, ThemeContext } from './themeContext.ts'
 import {
+    ACCOUNT_CACHE_KEY,
     DEFAULT_MOTION,
     DEFAULT_THEME,
     isMotionId,
@@ -39,10 +40,43 @@ const motionStorage: LocalStorageOptions<MotionId> = {
     },
 }
 
+function readAccountCache(): AccountPreferences | null {
+    try {
+        const parsed = JSON.parse(window.localStorage.getItem(ACCOUNT_CACHE_KEY) ?? 'null') as Partial<AccountPreferences> | null
+        return parsed && isThemeId(parsed.theme) && isMotionId(parsed.motion) ? { theme: parsed.theme, motion: parsed.motion } : null
+    } catch {
+        return null
+    }
+}
+
 export function ThemeProvider({ children }: { children: React.ReactNode }) {
-    // the pre-paint script (see vite.ts) reads the same keys, so a reload doesn't flash the default
-    const [theme, setTheme] = useLocalStorageState(THEME_STORAGE_KEY, DEFAULT_THEME, themeStorage)
-    const [motion, setMotion] = useLocalStorageState(MOTION_STORAGE_KEY, DEFAULT_MOTION, motionStorage)
+    // the signed-out settings; the pre-paint script (see vite.ts) reads the same keys, so a reload
+    // doesn't flash the default
+    const [localTheme, setLocalTheme] = useLocalStorageState(THEME_STORAGE_KEY, DEFAULT_THEME, themeStorage)
+    const [localMotion, setLocalMotion] = useLocalStorageState(MOTION_STORAGE_KEY, DEFAULT_MOTION, motionStorage)
+    // a signed-in user's settings, which come from and go to their account only (see clerk.tsx), so
+    // signing out returns to this browser's own signed-out choice. It starts from the first-frame
+    // copy, so the first render matches what the pre-paint script drew.
+    const [account, setAccount] = React.useState<AccountPreferences | null>(readAccountCache)
+    React.useEffect(() => {
+        try {
+            if (account) window.localStorage.setItem(ACCOUNT_CACHE_KEY, JSON.stringify(account))
+            else window.localStorage.removeItem(ACCOUNT_CACHE_KEY)
+        } catch {
+            // without the copy, a reload just shows the signed-out choice until Clerk loads
+        }
+    }, [account])
+    const theme = account?.theme ?? localTheme
+    const motion = account?.motion ?? localMotion
+
+    const setTheme = React.useCallback(
+        (next: ThemeId) => (account ? setAccount({ ...account, theme: next }) : setLocalTheme(next)),
+        [account, setLocalTheme]
+    )
+    const setMotion = React.useCallback(
+        (next: MotionId) => (account ? setAccount({ ...account, motion: next }) : setLocalMotion(next)),
+        [account, setLocalMotion]
+    )
     const reduceMotion = React.useSyncExternalStore(subscribeToReduceMotion, prefersReducedMotion)
 
     React.useEffect(() => {
@@ -72,5 +106,11 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
         [theme, setTheme, motion, setMotion, animated, setAnimated]
     )
 
-    return <ThemeContext value={value}>{children}</ThemeContext>
+    const accountControl = React.useMemo(() => ({ account, setAccount }), [account])
+
+    return (
+        <AccountPreferencesContext value={accountControl}>
+            <ThemeContext value={value}>{children}</ThemeContext>
+        </AccountPreferencesContext>
+    )
 }

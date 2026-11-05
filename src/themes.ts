@@ -43,5 +43,9 @@ export function isMotionId(value: unknown): value is MotionId {
 // script from `@somedaytundra/theme/vite` reads them before the app loads.
 export const THEME_STORAGE_KEY = 'st.theme'
 export const MOTION_STORAGE_KEY = 'st.motion'
+// A signed-in user's settings live in their account, not here; this is only a copy of them for the
+// first frame (the pre-paint script and ThemeProvider's first render), so a reload doesn't flash
+// the signed-out choice while Clerk loads. It's removed once Clerk confirms no one is signed in.
+export const ACCOUNT_CACHE_KEY = 'st.account.preferences'
 export const DEFAULT_THEME: ThemeId = 'glacier-forest'
 export const DEFAULT_MOTION: MotionId = 'always'
