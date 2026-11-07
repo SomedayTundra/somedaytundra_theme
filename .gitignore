@@ -9,3 +9,6 @@ dist
 .vscode/*
 !.vscode/extensions.json
 *.iml
+
+# Claude Code per-user settings (can hold approved commands verbatim)
+/.claude/settings.local.json
