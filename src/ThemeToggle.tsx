@@ -20,22 +20,26 @@ type ThemeToggleProps = {
     compact?: boolean
     // false drops the animation switch, for apps that don't draw the animated backdrop
     animationToggle?: boolean
+    // fill the parent's width, splitting it evenly between the theme buttons (the animation
+    // switch keeps its natural width)
+    stretch?: boolean
 }
 
 // Quick-access switches for the theme and (unless animationToggle is false) background animation;
 // the same choices live under
 // Settings › Appearance.
-export default function ThemeToggle({ compact = false, animationToggle = true }: ThemeToggleProps) {
+export default function ThemeToggle({ compact = false, animationToggle = true, stretch = false }: ThemeToggleProps) {
     const { theme, setTheme, animated, setAnimated } = useTheme()
     const button = compact ? compactSegment : fullSegment
     return (
         <div
             className={clsx(
                 'flex items-center gap-1 border border-st-line bg-st-surface p-1',
-                compact ? 'h-9 rounded-[10px]' : 'h-11 rounded-xl'
+                compact ? 'h-9 rounded-[10px]' : 'h-11 rounded-xl',
+                stretch && 'w-full'
             )}
         >
-            <div role="group" aria-label="Theme" className="flex h-full items-center gap-1">
+            <div role="group" aria-label="Theme" className={clsx('flex h-full items-center gap-1', stretch && 'flex-1')}>
                 {OPTIONS.map(({ id, Icon }) => {
                     const active = theme === id
                     return (
@@ -45,7 +49,11 @@ export default function ThemeToggle({ compact = false, animationToggle = true }:
                             aria-pressed={active}
                             onClick={() => setTheme(id)}
                             title={THEMES[id].name}
-                            className={clsx(button, active ? activeSegment : inactiveSegment)}
+                            className={clsx(
+                                button,
+                                active ? activeSegment : inactiveSegment,
+                                stretch && 'flex-1 justify-center'
+                            )}
                         >
                             <Icon aria-hidden="true" className="size-4" />
                             {compact ? (
