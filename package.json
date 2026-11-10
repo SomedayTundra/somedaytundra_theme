@@ -1,6 +1,6 @@
 {
   "name": "@somedaytundra/theme",
-  "version": "0.3.3",
+  "version": "0.3.4",
   "description": "The SomedayTundra Glacier Forest and Aurora themes: tokens, backdrops, igloo logo, theme provider and Clerk styling.",
   "private": true,
   "type": "module",
