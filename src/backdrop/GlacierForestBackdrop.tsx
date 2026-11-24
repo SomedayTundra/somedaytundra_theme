@@ -36,9 +36,11 @@ const NEAR_FLAKES = FLAKES.filter((f) => !f.far)
 function treeLayer(children: React.ReactNode) {
     return (
         <svg
-            viewBox="0 0 1440 150"
+            viewBox={TREE_LINE.viewBox}
+            width={TREE_LINE.width}
+            height={TREE_LINE.height}
             preserveAspectRatio="none"
-            className="absolute inset-x-0 bottom-0 h-[150px] w-full"
+            className="absolute bottom-0 left-0 max-w-none"
         >
             {children}
         </svg>

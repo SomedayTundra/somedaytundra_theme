@@ -79,9 +79,11 @@ export default function AuroraBackdrop() {
                 style={{ background: 'linear-gradient(0deg, rgba(42, 78, 98, 0.34) 0%, rgba(30, 58, 76, 0.16) 45%, rgba(30, 58, 76, 0) 100%)' }}
             />
             <svg
-                viewBox="0 0 1440 150"
+                viewBox={TREE_LINE.viewBox}
+                width={TREE_LINE.width}
+                height={TREE_LINE.height}
                 preserveAspectRatio="none"
-                className="absolute inset-x-0 bottom-0 h-[150px] w-full"
+                className="absolute bottom-0 left-0 max-w-none"
             >
                 <path d={TREE_LINE.silhouette} fill="#020306" />
             </svg>
