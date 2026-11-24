@@ -33,6 +33,7 @@
     --color-st-accent-soft-ink: var(--st-accent-soft-ink);
     --color-st-accent-tint: var(--st-accent-tint);
     --color-st-nav-hover: var(--st-nav-hover);
+    --color-st-card-title: var(--st-card-title);
     --color-st-link: var(--st-link);
     --color-st-wordmark: var(--st-wordmark);
     --color-st-proj-nhl: var(--st-proj-nhl);
@@ -65,7 +66,8 @@
     --st-accent-soft-ink: #17589F;
     /* one step deeper than accent-soft: hover and highlight on a tinted surface */
     --st-accent-tint: #CCDFF4;
-    --st-nav-hover: #EAF2FA;
+    --st-nav-hover: #EAF2FA;    /* a card's title band, across the top of the card */
+    --st-card-title: #C9DCF1;
     --st-link: #1F6BC0;
     --st-wordmark: #377ACD;
     --st-proj-nhl: #1F6BC0;
@@ -95,6 +97,7 @@
     --st-accent-soft-ink: #7EF0BE;
     --st-accent-tint: rgba(91, 231, 169, 0.2);
     --st-nav-hover: #121A24;
+    --st-card-title: rgba(91, 231, 169, 0.1);
     --st-link: #7EF0BE;
     --st-wordmark: #4CCFE0;
     --st-proj-nhl: #5BE7A9;
